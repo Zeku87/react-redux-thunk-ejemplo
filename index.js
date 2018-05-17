@@ -1,53 +1,39 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import 'whatwg-fetch';
 
 class ItemList extends Component {
-    constructor() {
-        super();
+    
+    constructor(props) {
+        super(props);
 
         this.state = {
-            items: [
-                {
-                    id: 1,
-                    label: 'List item 1'
-                },
-                {
-                    id: 2,
-                    label: 'List item 2'
-                },
-                {
-                    id: 3,
-                    label: 'List item 3'
-                },
-                {
-                    id: 4,
-                    label: 'List item 4'
-                }
-            ],
-            hasErrored: false,
-            isLoading: false
+            items: []
         };
     }
 
+    componentDidMount (){
+        const url = 'http://5826ed963900d612000138bd.mockapi.io/items';
+        fetch(url)
+            .then( response => response )
+            .then( response => response.json() )
+            .then( items => this.setState({items})
+        )}
+
     render() {
-        if (this.state.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
+            return (
+                <div>
+                    <ul>
+                        {this.state.items.map( item => 
+                            <li key={item.id}>
+                                {item.label}
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            );
         }
-
-        if (this.state.isLoading) {
-            return <p>Loading…</p>;
-        }
-
-        return (
-            <ul>
-                {this.state.items.map((item) => (
-                    <li key={item.id}>
-                        {item.label}
-                    </li>
-                ))}
-            </ul>
-        );
-    }
 }
 
 ReactDOM.render(<ItemList/>, document.getElementById("container"));
