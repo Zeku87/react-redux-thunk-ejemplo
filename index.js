@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import 'whatwg-fetch';
 
 class ItemList extends Component {
@@ -9,19 +8,35 @@ class ItemList extends Component {
         super(props);
 
         this.state = {
-            items: []
+            items: [],
+            isLoading:true,
+            hasErrors:false,
         };
     }
 
     componentDidMount (){
+        this.setState({isLoading: true})
         const url = 'http://5826ed963900d612000138bd.mockapi.io/items';
         fetch(url)
-            .then( response => response )
             .then( response => response.json() )
-            .then( items => this.setState({items})
+            .then( items => this.setState({
+                items:items,
+                isLoading:false
+            })
+            .catch(
+                error => this.setState({
+                    isLoading:false, 
+                    hasErrors:true
+                })
+            )
         )}
 
     render() {
+            if( this.state.hasErrors)
+                return <div>Error: es posible que no haya escrito bien la url o no tenga persmisos</div>;
+            if( this.state.isLoading)
+                return <div>Cargando...</div>;
+        
             return (
                 <div>
                     <ul>
