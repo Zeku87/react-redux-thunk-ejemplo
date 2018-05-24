@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux'
 import ItemList from './components/ItemList';
@@ -8,6 +8,8 @@ const store = configureStore()
 
 
 render(
-    <Provider store={store}><ItemList/></Provider>, 
-    document.getElementById("container")
+    <Provider store={store}>
+        <ItemList/>
+    </Provider>, 
+    document.getElementById("root")
 );
