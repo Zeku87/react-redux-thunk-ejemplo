@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {itemsFetchData} from '../actions/items'
+import {itemsFetchData} from '../redux/actions/items'
 
 class ItemList extends Component {
     

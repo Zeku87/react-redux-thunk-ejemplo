@@ -71,18 +71,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./actions/items.js":
-/*!**************************!*\
-  !*** ./actions/items.js ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.hasErrored = hasErrored;\nexports.isLoading = isLoading;\nexports.data = data;\nexports.itemsFetchData = itemsFetchData;\nfunction hasErrored(bool) {\n    return {\n        type: 'ERROR',\n        hasErrored: bool\n    };\n}\n\nfunction isLoading(bool) {\n    return {\n        type: 'LOADING',\n        isLoading: bool\n    };\n}\n\nfunction data(items) {\n    console.log(\"ITEMS action: \", items);\n    return {\n        type: \"OK\",\n        items: items\n    };\n}\n\nfunction itemsFetchData(url) {\n    console.log(\"url: \", url);\n    return function (dispatch) {\n        dispatch(isLoading(true));\n\n        fetch(url).then(function (response) {\n            if (!response.ok) {\n                throw Error(response.statusText);\n            }\n\n            dispatch(isLoading(false));\n            return response;\n        }).then(function (response) {\n            return response.json();\n        }).then(function (items) {\n\n            console.log(\"ITEMS: \", items);\n            dispatch(data(items));\n        }).catch(function () {\n            return dispatch(hasErrored(true));\n        });\n    };\n}\n\n//# sourceURL=webpack:///./actions/items.js?");
-
-/***/ }),
-
 /***/ "./components/ItemList.js":
 /*!********************************!*\
   !*** ./components/ItemList.js ***!
@@ -91,7 +79,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _items = __webpack_require__(/*! ../actions/items */ \"./actions/items.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar ItemList = function (_Component) {\n    _inherits(ItemList, _Component);\n\n    function ItemList() {\n        _classCallCheck(this, ItemList);\n\n        return _possibleConstructorReturn(this, (ItemList.__proto__ || Object.getPrototypeOf(ItemList)).apply(this, arguments));\n    }\n\n    _createClass(ItemList, [{\n        key: 'componentDidMount',\n        value: function componentDidMount() {\n            this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');\n        }\n    }, {\n        key: 'render',\n        value: function render() {\n            if (this.props.hasErrored) return _react2.default.createElement(\n                'div',\n                null,\n                'Error: es posible que no haya escrito bien la url o no tenga persmisos'\n            );\n            if (this.props.isLoading) return _react2.default.createElement(\n                'div',\n                null,\n                'Cargando...'\n            );\n\n            return _react2.default.createElement(\n                'div',\n                null,\n                _react2.default.createElement(\n                    'ul',\n                    null,\n                    this.props.items.map(function (item) {\n                        return _react2.default.createElement(\n                            'li',\n                            { key: item.id },\n                            item.label\n                        );\n                    })\n                )\n            );\n        }\n    }]);\n\n    return ItemList;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n    return {\n        items: state.items,\n        hasErrored: state.hasErrored,\n        isLoading: state.isLoading\n    };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n    return {\n        fetchData: function fetchData(url) {\n            return dispatch((0, _items.itemsFetchData)(url));\n        }\n    };\n};\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ItemList);\n\n//# sourceURL=webpack:///./components/ItemList.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _items = __webpack_require__(/*! ../redux/actions/items */ \"./redux/actions/items.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar ItemList = function (_Component) {\n    _inherits(ItemList, _Component);\n\n    function ItemList() {\n        _classCallCheck(this, ItemList);\n\n        return _possibleConstructorReturn(this, (ItemList.__proto__ || Object.getPrototypeOf(ItemList)).apply(this, arguments));\n    }\n\n    _createClass(ItemList, [{\n        key: 'componentDidMount',\n        value: function componentDidMount() {\n            this.props.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');\n        }\n    }, {\n        key: 'render',\n        value: function render() {\n            if (this.props.hasErrored) return _react2.default.createElement(\n                'div',\n                null,\n                'Error: es posible que no haya escrito bien la url o no tenga persmisos'\n            );\n            if (this.props.isLoading) return _react2.default.createElement(\n                'div',\n                null,\n                'Cargando...'\n            );\n\n            return _react2.default.createElement(\n                'div',\n                null,\n                _react2.default.createElement(\n                    'ul',\n                    null,\n                    this.props.items.map(function (item) {\n                        return _react2.default.createElement(\n                            'li',\n                            { key: item.id },\n                            item.label\n                        );\n                    })\n                )\n            );\n        }\n    }]);\n\n    return ItemList;\n}(_react.Component);\n\nvar mapStateToProps = function mapStateToProps(state) {\n    return {\n        items: state.items,\n        hasErrored: state.hasErrored,\n        isLoading: state.isLoading\n    };\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n    return {\n        fetchData: function fetchData(url) {\n            return dispatch((0, _items.itemsFetchData)(url));\n        }\n    };\n};\n\nexports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ItemList);\n\n//# sourceURL=webpack:///./components/ItemList.js?");
 
 /***/ }),
 
@@ -103,7 +91,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _ItemList = __webpack_require__(/*! ./components/ItemList */ \"./components/ItemList.js\");\n\nvar _ItemList2 = _interopRequireDefault(_ItemList);\n\nvar _configureStore = __webpack_require__(/*! ./store/configureStore */ \"./store/configureStore.js\");\n\nvar _configureStore2 = _interopRequireDefault(_configureStore);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar store = (0, _configureStore2.default)();\n\n(0, _reactDom.render)(_react2.default.createElement(\n    _reactRedux.Provider,\n    { store: store },\n    _react2.default.createElement(_ItemList2.default, null)\n), document.getElementById(\"root\"));\n\n//# sourceURL=webpack:///./index.js?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\nvar _ItemList = __webpack_require__(/*! ./components/ItemList */ \"./components/ItemList.js\");\n\nvar _ItemList2 = _interopRequireDefault(_ItemList);\n\nvar _configureStore = __webpack_require__(/*! ./redux/store/configureStore */ \"./redux/store/configureStore.js\");\n\nvar _configureStore2 = _interopRequireDefault(_configureStore);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar store = (0, _configureStore2.default)();\n\n(0, _reactDom.render)(_react2.default.createElement(\n    _reactRedux.Provider,\n    { store: store },\n    _react2.default.createElement(_ItemList2.default, null)\n), document.getElementById(\"root\"));\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ }),
 
@@ -775,39 +763,51 @@ eval("module.exports = function(originalModule) {\r\n\tif (!originalModule.webpa
 
 /***/ }),
 
-/***/ "./reducers/index.js":
-/*!***************************!*\
-  !*** ./reducers/index.js ***!
-  \***************************/
+/***/ "./redux/actions/items.js":
+/*!********************************!*\
+  !*** ./redux/actions/items.js ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _items = __webpack_require__(/*! ./items */ \"./reducers/items.js\");\n\nexports.default = (0, _redux.combineReducers)({\n    items: _items.items,\n    isLoading: _items.isLoading,\n    hasErrored: _items.hasErrored\n});\n\n//# sourceURL=webpack:///./reducers/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.hasErrored = hasErrored;\nexports.isLoading = isLoading;\nexports.data = data;\nexports.itemsFetchData = itemsFetchData;\nfunction hasErrored(bool) {\n    return {\n        type: 'ERROR',\n        hasErrored: bool\n    };\n}\n\nfunction isLoading(bool) {\n    return {\n        type: 'LOADING',\n        isLoading: bool\n    };\n}\n\nfunction data(items) {\n    console.log(\"ITEMS action: \", items);\n    return {\n        type: \"OK\",\n        items: items\n    };\n}\n\nfunction itemsFetchData(url) {\n    console.log(\"url: \", url);\n    return function (dispatch) {\n        dispatch(isLoading(true));\n\n        fetch(url).then(function (response) {\n            if (!response.ok) {\n                throw Error(response.statusText);\n            }\n\n            dispatch(isLoading(false));\n            return response;\n        }).then(function (response) {\n            return response.json();\n        }).then(function (items) {\n\n            console.log(\"ITEMS: \", items);\n            dispatch(data(items));\n        }).catch(function () {\n            return dispatch(hasErrored(true));\n        });\n    };\n}\n\n//# sourceURL=webpack:///./redux/actions/items.js?");
 
 /***/ }),
 
-/***/ "./reducers/items.js":
-/*!***************************!*\
-  !*** ./reducers/items.js ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.hasErrored = hasErrored;\nexports.isLoading = isLoading;\nexports.items = items;\nfunction hasErrored() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n    var action = arguments[1];\n\n    return action.type === \"ERROR\" ? action.hasErrored : state;\n}\n\nfunction isLoading() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n    var action = arguments[1];\n\n    return action.type === \"LOADING\" ? action.isLoading : state;\n}\n\nfunction items() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n    var action = arguments[1];\n\n    console.log(\"REDUCER ITEMS: \", action.items);\n    return action.type === \"OK\" ? action.items : state;\n}\n\n//# sourceURL=webpack:///./reducers/items.js?");
-
-/***/ }),
-
-/***/ "./store/configureStore.js":
+/***/ "./redux/reducers/index.js":
 /*!*********************************!*\
-  !*** ./store/configureStore.js ***!
+  !*** ./redux/reducers/index.js ***!
   \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.default = configureStore;\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/lib/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducers = __webpack_require__(/*! ../reducers */ \"./reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction configureStore(initialState) {\n    return (0, _redux.createStore)(_reducers2.default, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));\n}\n\n//# sourceURL=webpack:///./store/configureStore.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _items = __webpack_require__(/*! ./items */ \"./redux/reducers/items.js\");\n\nexports.default = (0, _redux.combineReducers)({\n    items: _items.items,\n    isLoading: _items.isLoading,\n    hasErrored: _items.hasErrored\n});\n\n//# sourceURL=webpack:///./redux/reducers/index.js?");
+
+/***/ }),
+
+/***/ "./redux/reducers/items.js":
+/*!*********************************!*\
+  !*** ./redux/reducers/items.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.hasErrored = hasErrored;\nexports.isLoading = isLoading;\nexports.items = items;\nfunction hasErrored() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n    var action = arguments[1];\n\n    return action.type === \"ERROR\" ? action.hasErrored : state;\n}\n\nfunction isLoading() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n    var action = arguments[1];\n\n    return action.type === \"LOADING\" ? action.isLoading : state;\n}\n\nfunction items() {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n    var action = arguments[1];\n\n    console.log(\"REDUCER ITEMS: \", action.items);\n    return action.type === \"OK\" ? action.items : state;\n}\n\n//# sourceURL=webpack:///./redux/reducers/items.js?");
+
+/***/ }),
+
+/***/ "./redux/store/configureStore.js":
+/*!***************************************!*\
+  !*** ./redux/store/configureStore.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.default = configureStore;\n\nvar _redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/lib/index.js\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducers = __webpack_require__(/*! ../reducers */ \"./redux/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction configureStore(initialState) {\n    return (0, _redux.createStore)(_reducers2.default, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));\n}\n\n//# sourceURL=webpack:///./redux/store/configureStore.js?");
 
 /***/ })
 
