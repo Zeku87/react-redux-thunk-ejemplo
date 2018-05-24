@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {itemsFetchData} from '../redux/actions/items'
+import {itemsFetchData} from '../redux/actions/items';
+
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
 class ItemList extends Component {
     
@@ -15,14 +17,14 @@ class ItemList extends Component {
             return <div>Cargando...</div>;
         
         return (
-            <div>
-                <ul>
+            <div className="container">
+                <ListGroup>
                     {this.props.items.map( item => 
-                        <li key={item.id}>
-                            {item.label}
-                        </li>
+                        <ListGroupItem key={item.id}>
+                            <b>ID:</b> {item.id} - <b>Info:</b> {item.label}
+                        </ListGroupItem>
                     )}
-                </ul>
+                </ListGroup>
             </div>
         );
     }
